@@ -1,0 +1,43 @@
+---
+swagger: "2.0"
+info:
+  description: "REVEAL Genomics API"
+  version: "1.0"
+  title: "REVEAL Genomics"
+host: "virtserver.swaggerhub.com"
+basePath: "/ksens/reveal-genomics-basic/1.0"
+schemes:
+- "https"
+paths:
+  /gene_symbols:
+    get:
+      summary: "Gets gene symbols"
+      description: "Returns a list of gene symbols from the database"
+      operationId: "gene_symbols_get"
+      parameters:
+      - name: "gene_symbol"
+        in: "query"
+        description: "gene symbol to search by"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A list of gene symbols"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/inline_response_200"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+definitions:
+  inline_response_200:
+    required:
+    - "gene_symbol"
+    - "gene_symbol_id"
+    properties:
+      gene_symbol_id:
+        type: "integer"
+      gene_symbol:
+        type: "string"
+    example:
+      gene_symbol_id: 0
+      gene_symbol: "gene_symbol"
